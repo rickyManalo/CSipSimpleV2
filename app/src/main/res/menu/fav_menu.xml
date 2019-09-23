@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/set_group"
+        android:title="@string/set_android_group"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/set_sip_data"
+        app:showAsAction="never"
+        android:title="@string/set_sip_data"/>
+    <item
+        android:id="@+id/share_presence"
+        app:showAsAction="never"
+        android:title="@string/activate_presence_sharing"/>
+
+</menu>

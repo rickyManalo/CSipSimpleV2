@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:weightSum="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/lytInCallControlsLoudSpeaker"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/chkInCallControlsMenuLoudSpeaker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:button="@drawable/loud_speaker_statelist_bg"
+                    android:checked="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytIncallControlsMute"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/chkInCallControlsMenuMute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:button="@drawable/mute_statelist_bg"
+                    android:checked="false"
+                    android:foregroundGravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lytInCallControlsBluetooth"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/chkInCallControlsMenuBluetooth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:button="@drawable/bluetooth_statelist_bg"
+                    android:checked="false"
+                    android:foregroundGravity="center" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgInCallControlsMenuAddCall"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:src="@android:drawable/ic_menu_add" />
+
+            <ImageView
+                android:id="@+id/imgInCallControlsMenuMediaSettings"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="13dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_menu_preferences_v2" />
+        </TableRow>
+    </android.support.constraint.ConstraintLayout>
+
+</merge>
+

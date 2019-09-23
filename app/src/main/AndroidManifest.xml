@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.csipsimple"
+    android:installLocation="auto">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--
+    <uses-permission android:name="android.permission.CALL_PRIVILEGED" /> 
+    was useless anyway as only granted to system app and
+    we don't have core integration anymore with these plugins
+    -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.USE_SIP" />
+    <uses-permission android:name="android.permission.CONFIGURE_SIP" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-feature android:name="android.hardware.screen.portrait" />
+    <!--
+    Not taken into account?
+    Regarding Diane's comment this was never implemented 
+    and was dropped in most recent android versions 
+    <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY" />
+    -->
+    <!-- COMMENT THIS if you plan to use in library mode -->
+    <permission
+        android:name="android.permission.USE_SIP"
+        android:description="@string/permdesc_useSip"
+        android:label="@string/permlab_useSip"
+        android:permissionGroup="android.permission-group.COST_MONEY"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="android.permission.CONFIGURE_SIP"
+        android:description="@string/permdesc_configureSip"
+        android:label="@string/permlab_configureSip"
+        android:permissionGroup="android.permission-group.COST_MONEY"
+        android:protectionLevel="dangerous" /> <!-- END OF COMMENT THIS -->
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.sensorPortrait"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:backupAgent=".backup.SipBackupAgent"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher_nightly"
+        android:label="@string/app_name">
+        <activity android:name=".ui.RuntimePermissionsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="app_type"
+            android:value="nightly" />
+        <meta-data
+            android:name="app_channel"
+            android:value="trunk" />
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIL5x8Klvg-Y8nV4j4PNSy2JH6yQZ49yKbrqKJAw" />
+        <!--
+        Samsung multiview support
+        <uses-library
+            android:name="com.sec.android.app.multiwindow"
+            android:required="false" />
+        -->
+        <meta-data
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
+
+        <activity
+            android:name=".ui.SipHome"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme.Title"
+            android:uiOptions="splitActionBarWhenNarrow">
+
+            <intent-filter android:priority="10">
+                <action android:name="com.csipsimple.phone.action.DIALER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="android.intent.action.DIAL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sip" />
+                <data android:scheme="csip" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.csipsimple.phone.action.CALLLOG" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.csipsimple.phone.action.FAVORITES" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.csipsimple.phone.action.MESSAGES" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name=".ui.SipDialer"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorPortrait"
+            android:targetActivity=".ui.SipHome"
+            android:theme="@style/DarkTheme"
+            android:uiOptions="splitActionBarWhenNarrow">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="csip" />
+                <data android:scheme="sip" />
+                <data android:scheme="sips" />
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="csip"
+                    android:scheme="imto" />
+                <data
+                    android:host="sip"
+                    android:scheme="imto" />
+                <data
+                    android:host="skype"
+                    android:scheme="imto" />
+            </intent-filter>
+        </activity-alias> <!-- Main service -->
+        <!-- Require at least the configure permission to use -->
+        <service
+            android:name=".service.SipService"
+            android:exported="true"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:process=":sipStack">
+            <intent-filter>
+                <action android:name="com.csipsimple.service.SipService" />
+                <action android:name="com.csipsimple.service.SipConfiguration" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.Downloader" />
+
+        <receiver
+            android:name=".service.DeviceStateReceiver"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:process=":sipStack">
+
+            <!-- Here filter for protected-broadcasts -->
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.csipsimple.accounts.activate" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver> <!-- Main ui -->
+        <activity
+            android:name=".ui.calllog.CallLogDetailsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" /> <!-- Accounts -->
+        <activity
+            android:name=".ui.filters.AccountFilters"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/filters"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity
+            android:name=".ui.filters.EditFilter"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/filters"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity
+            android:name=".wizards.WizardChooser"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/choose_wizard"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme.Dialog" /> <!-- Impl ExpandableActivity Preferences -->
+        <activity
+            android:name=".ui.prefs.hc.MainPrefs"
+            android:configChanges="keyboardHidden|orientation"
+            android:enabled="@bool/use_hc_prefs"
+            android:label="@string/prefs"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme">
+            <intent-filter>
+                <action android:name="com.csipsimple.ui.action.PREFS_GLOBAL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.prefs.cupcake.MainPrefs"
+            android:configChanges="keyboardHidden|orientation"
+            android:enabled="@bool/use_cupcake_prefs"
+            android:label="@string/prefs"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme">
+            <intent-filter>
+                <action android:name="com.csipsimple.ui.action.PREFS_GLOBAL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.prefs.cupcake.PrefsLoaderActivity"
+            android:label=""
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity
+            android:name=".ui.prefs.PrefsFilters"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/filters"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity
+            android:name=".ui.prefs.PrefsFast"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/prefs_fast"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme.Dialog">
+            <intent-filter>
+                <action android:name="com.csipsimple.ui.action.PREFS_FAST" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.prefs.Codecs"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/codecs"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity
+            android:name=".ui.prefs.AudioTester"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/test_audio"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme.Dialog" /> <!-- Wizards -->
+        <activity
+            android:name=".wizards.BasePrefsWizard"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/edit"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" /> <!-- Impl field input, Call management -->
+        <receiver
+            android:name=".service.OutgoingCall"
+            android:permission="android.permission.CALL_PHONE"
+            android:process=":sipStack">
+
+            <!-- Here filter for protected-broadcasts -->
+            <intent-filter android:priority="0">
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ui.outgoingcall.OutgoingCallChooser"
+            android:allowTaskReparenting="false"
+            android:configChanges="keyboardHidden|orientation"
+            android:excludeFromRecents="true"
+            android:label="@string/call"
+            android:launchMode="singleTask"
+            android:permission="android.permission.USE_SIP"
+            android:process=":sipStack"
+            android:screenOrientation="sensorPortrait"
+            android:taskAffinity=""
+            android:theme="@style/DarkTheme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.CALL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="csip" />
+                <data android:scheme="sip" />
+                <data android:scheme="sips" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="android.phone.extra.NEW_CALL_INTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="csip" />
+                <data android:scheme="sip" />
+                <data android:scheme="sips" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name=".ui.PrivilegedOutgoingCallBroadcaster"
+            android:configChanges="keyboardHidden|orientation"
+            android:enabled="false"
+            android:excludeFromRecents="true"
+            android:label="@string/sip_call"
+            android:launchMode="singleTask"
+            android:permission="android.permission.CALL_PRIVILEGED"
+            android:screenOrientation="sensorPortrait"
+            android:targetActivity=".ui.outgoingcall.OutgoingCallChooser"
+            android:theme="@style/DarkTheme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.CALL_PRIVILEGED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="tel" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CALL_PRIVILEGED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/phone" />
+                <data android:mimeType="vnd.android.cursor.item/phone_v2" />
+                <data android:mimeType="vnd.android.cursor.item/person" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".ui.PrivilegedOutgoingSipCallBroadcaster"
+            android:configChanges="keyboardHidden|orientation"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:permission="android.permission.CALL_PRIVILEGED"
+            android:screenOrientation="sensorPortrait"
+            android:targetActivity=".ui.outgoingcall.OutgoingCallChooser"
+            android:theme="@style/DarkTheme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.CALL_PRIVILEGED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sip" />
+            </intent-filter>
+        </activity-alias> <!-- To be able to do video, this has to be launched in sipStack process -->
+        <activity
+            android:name=".ui.incall.InCallActivity"
+            android:allowTaskReparenting="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:process=":sipStack"
+            android:screenOrientation="sensorPortrait"
+            android:taskAffinity=""
+            android:theme="@style/DarkTheme.NoTitle">
+            <intent-filter android:priority="10">
+                <action android:name="com.csipsimple.phone.action.INCALL" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.PickupSipUri"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/pickup_sip_uri"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity
+            android:name=".ui.incall.InCallMediaControl"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/prefs_media"
+            android:screenOrientation="sensorPortrait"
+            android:taskAffinity="com.csipsimple.ui.incall.InCallActivity"
+            android:theme="@style/DarkTheme.Dialog" />
+
+        <receiver android:name=".service.HeadsetButtonReceiver" /> <!-- Widget -->
+        <receiver
+            android:name=".widgets.AccountWidgetProvider"
+            android:icon="@drawable/appwidget_preview"
+            android:label="@string/gadget_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.csipsimple.service.ACCOUNT_CHANGED" />
+                <action android:name="com.csipsimple.service.REGISTRATION_CHANGED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_info" />
+        </receiver>
+
+        <activity
+            android:name=".widgets.AccountWidgetConfigure"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".widgets.ShortcutWidgetProvider"
+            android:icon="@drawable/ic_ab_favourites_holo_dark"
+            android:label="@string/csipsimple_shortcut">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appshortcut_info" />
+        </receiver>
+
+        <activity
+            android:name=".widgets.ShortcutWidgetConfigure"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity> <!-- Messages -->
+        <activity
+            android:name=".ui.messages.MessageActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme"
+            android:windowSoftInputMode="stateHidden" /> <!-- Embedded plugins -->
+        <!-- Call handlers android:process=":telCallHandler" -->
+        <receiver
+            android:name=".plugins.telephony.CallHandler"
+            android:permission="android.permission.PROCESS_OUTGOING_CALLS"
+            android:process=":sipStack">
+            <intent-filter>
+                <action android:name="com.csipsimple.phone.action.HANDLE_CALL" />
+            </intent-filter>
+        </receiver> <!-- Databases providers -->
+        <provider
+            android:name=".service.PreferenceProvider"
+            android:authorities="com.csipsimple.prefs"
+            android:permission="android.permission.CONFIGURE_SIP" />
+        <provider
+            android:name=".db.DBProvider"
+            android:authorities="com.csipsimple.db"
+            android:permission="android.permission.CONFIGURE_SIP"
+            android:process=":sipStack" /> <!-- New UI -->
+        <activity
+            android:name=".ui.account.AccountsEditList"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/accounts"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme.Title" />
+        <activity
+            android:name=".ui.account.AccountEdit"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" /> <!-- Extra codecs -->
+        <receiver
+            android:name=".plugins.codecs.ReceiverSILK"
+            android:exported="false">
+            <meta-data
+                android:name="lib_name"
+                android:value="libpj_silk_codec.so" />
+            <meta-data
+                android:name="init_factory"
+                android:value="pjmedia_codec_silk_init" />
+
+            <intent-filter>
+                <action android:name="com.csipsimple.codecs.action.REGISTER_CODEC" />
+            </intent-filter>
+        </receiver> <!-- OPUS? -->
+        <!-- Extra wizard creation account activities -->
+        <activity
+            android:name=".wizards.impl.MondotalkCreate"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/DarkTheme" />
+        <activity android:name=".ui.prefs.GenericPrefs" />
+    </application>
+
+</manifest>

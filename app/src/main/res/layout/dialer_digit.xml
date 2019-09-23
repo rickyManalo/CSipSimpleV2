@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Copyright (C) 2010 Regis Montoya (aka r3gis - www.r3gis.fr) 
+	Copyright (C) 2008 The Android Open Source Project
+	
+	This file is part of CSipSimple.
+    CSipSimple is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+	If you own a pjsip commercial license you can also redistribute it
+	and/or modify it under the terms of the GNU Lesser General Public License
+	as an android library.
+
+    CSipSimple is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with CSipSimple.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<com.csipsimple.ui.dialpad.DialerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_digit_dialer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/topField"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialpad_background"
+        android:orientation="horizontal">
+
+        <com.csipsimple.ui.dialpad.DigitsEditText
+            android:id="@+id/digitsText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/accountChooserButton"
+            android:layout_toLeftOf="@+id/accountChooserButton"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/description_digits_edittext"
+            android:gravity="center"
+            android:imeActionLabel="@string/call"
+            android:imeOptions="actionGo"
+            android:nextFocusRight="@+id/accountChooserButton"
+            android:textAppearance="@style/DialtactsDigitsTextAppearance"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/rewriteTextInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/accountChooserButton"
+            android:layout_toLeftOf="@+id/accountChooserButton"
+            android:gravity="center"
+            android:textColor="#88FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
+        <com.csipsimple.widgets.AccountChooserButton
+            android:id="@+id/accountChooserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+        <RelativeLayout
+            android:id="@+id/lytCallFrontDesk"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#40aaaaaa"
+            android:descendantFocusability="blocksDescendants"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/imgDialerDigitCall"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="telephone_logo"
+                android:cropToPadding="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/csip_guest_services" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <!-- Autocomplete -->
+
+    <ListView
+        android:id="@+id/autoCompleteList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="visible" />
+
+    <!-- Keypad section -->
+
+    <include layout="@layout/dialpad_compose" />
+
+</com.csipsimple.ui.dialpad.DialerLayout>

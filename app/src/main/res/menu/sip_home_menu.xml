@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sip_home_menu_accounts"
+        android:icon="@drawable/ic_menu_account_list"
+        android:title="@string/accounts"
+        app:showAsAction="always|withText" />
+    <!--<item
+        android:id="@+id/prefs"
+        android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="withText"
+        android:title="@string/prefs"/>
+    <item
+        android:id="@+id/help"
+        android:title="@string/help"
+        android:icon="@android:drawable/ic_menu_help"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/menu_disconnect"
+        android:title="@string/menu_disconnect"
+        android:icon="@drawable/ic_lock_power_off"
+        app:showAsAction="withText"/>-->
+</menu>

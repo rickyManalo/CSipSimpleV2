@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/takeCallButton"
+        app:showAsAction="never"
+        android:title="@string/take_call"/>
+    <item
+        android:id="@+id/declineCallButton"
+        app:showAsAction="never"
+        android:title="@string/reject_call"/>
+    <item
+        android:id="@+id/dontTakeCallButton"
+        app:showAsAction="never"
+        android:title="@string/ignore_call"/>
+    <item
+        android:id="@+id/terminateCallButton"
+        app:showAsAction="never"
+        android:title="@string/clear_call"/>
+    <item
+        android:id="@+id/xferCallButton"
+        app:showAsAction="never"
+        android:title="@string/xfer_uri"/>
+    <item
+        android:id="@+id/transferCallButton"
+        app:showAsAction="never"
+        android:title="@string/transfer_to_call"/>
+    <item
+        android:id="@+id/holdCallButton"
+        app:showAsAction="never"
+        android:title="@string/hold_call"/>
+    <item
+        android:id="@+id/recordCallButton"
+        app:showAsAction="never"
+        android:title="@string/record"/>
+    <item
+        android:id="@+id/zrtpAcceptance"
+        app:showAsAction="never"
+        android:title="@string/zrtp_trust_remote"/>
+    <item
+        android:id="@+id/dtmfCallButton"
+        android:icon="@drawable/ic_ab_dialpad"
+        app:showAsAction="ifRoom"
+        android:title="@string/send_dtmf"/>
+    <item
+        android:id="@+id/videoCallButton"
+        android:icon="@drawable/ic_prefs_media_video"
+        app:showAsAction="ifRoom"
+        android:title="@string/video"/>
+    <item
+        android:id="@+id/detailedDisplayCallButton"
+        android:icon="@android:drawable/ic_menu_info_details"
+        app:showAsAction="ifRoom"
+        android:title="@string/info"/>
+
+</menu>

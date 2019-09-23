@@ -1,0 +1,8 @@
+stages:
+    - pass
+
+compile:
+    stage: pass
+    script:
+      - echo "pass"
+
