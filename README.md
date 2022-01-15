@@ -1,15 +1,11 @@
 # Hello, Ricky here
 You probably have to make a project that needs CSIP so you found this repo.
-
 Just one thing I want to tell you is, don't expect me to update this.
-
 I'm quite busy with other stuff nowadays, and even if I wanted to, I don't have a CSIP server I could use.
 
 
 I uploaded this in the hopes that someday someone better than me could update and clean this.
-
 I wanted to save other people from going through the hassle of what I have to go through
-
 to make this app to work before, which took me like a week.
 
 
